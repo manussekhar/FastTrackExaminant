@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 class ExamService {
 
     @Autowired
-    lateinit var dataService: DataService
+    private lateinit var dataService: DataService
 
     /**
      * Persist a Question with Answers to the data source
@@ -30,7 +30,7 @@ class ExamService {
             difficulty: String
     ) {
 
-        val answers: List<Answer> = answerTexts.mapIndexed { idx, value -> Answer(value, correctAnswer.contains(idx)) }
+        val answers = answerTexts.mapIndexed { idx, value -> Answer(value, correctAnswer.contains(idx)) }
 
         val question = Question(questionText, answers, pointsForCorrectAnswer, topic, Difficulty.valueOf(difficulty))
 
