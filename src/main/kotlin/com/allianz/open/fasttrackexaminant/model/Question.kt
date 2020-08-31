@@ -1,3 +1,9 @@
 package com.allianz.open.fasttrackexaminant.model
 
-data class Question(val id:Int, val text:String, val topic: String, val answers : List<Int>)
+import com.allianz.open.fasttrackexaminant.service.Difficulty
+
+data class Question(val questionText:String,
+                    val answers : List<Answer>,
+                    val pointsForCorrectAnswer: Int,
+                    val topic: String,
+                    val difficulty: Difficulty)

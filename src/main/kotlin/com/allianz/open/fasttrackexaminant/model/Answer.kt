@@ -1,3 +1,3 @@
 package com.allianz.open.fasttrackexaminant.model
 
-data class Answer(val id: Int, val text: String, val isCorrect: Boolean)
+data class Answer(val text: String, val correctAnswer:Boolean)
