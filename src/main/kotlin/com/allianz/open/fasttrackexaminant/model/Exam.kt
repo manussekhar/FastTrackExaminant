@@ -1,5 +1,3 @@
 package com.allianz.open.fasttrackexaminant.model
 
-data class Exam(val name: String){
-    val id : Int = 10;
-}
+data class Exam(val id : Int, val description : String, val questions : List<Int>)

@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class FasttrackexaminantApplication
+class Main
 
 fun main(args: Array<String>) {
-	runApplication<FasttrackexaminantApplication>(*args)
+	runApplication<Main>(*args)
 }
