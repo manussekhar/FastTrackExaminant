@@ -1,10 +1,11 @@
 package com.allianz.open.fasttrackexaminant.service
 
+import com.allianz.open.fasttrackexaminant.dto.QuestionDTO
 import com.allianz.open.fasttrackexaminant.model.Answer
 import com.allianz.open.fasttrackexaminant.model.Question
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.lang.RuntimeException
 
 @Service
 class ExamService {
@@ -12,39 +13,35 @@ class ExamService {
     @Autowired
     private lateinit var dataService: DataService
 
+    private val logger =  LoggerFactory.getLogger(ExamService::class.java)
+
+
     /**
      * Persist a Question with Answers to the data source
      *
-     * @param questionText
-     * @param answerTexts
-     * @param correctAnswer
-     * @param pointsForCorrectAnswer
-     * @param topic
-     * @param difficulty
+     * @param questionDTO
+     * @return Question Model
      */
-    fun createQuestion(
-            questionText: String,
-            answerTexts: List<String>,
-            correctAnswer: List<Int>,
-            pointsForCorrectAnswer: Int,
-            topic: String,
-            difficulty: String
-    ): Question {
+    fun createQuestion(questionDTO: QuestionDTO): Question {
 
-        val answers = answerTexts.mapIndexed { idx, value -> Answer(value, correctAnswer.contains(idx)) }
+        val answers = questionDTO.answerTexts.mapIndexed { idx, value -> Answer(value, questionDTO.correctAnswer.contains(idx)) }
 
-        if (answers.all { !it.correctAnswer }) {throw IllegalArgumentException("At least one Answer must be correct.")}
+        if (answers.all { !it.correctAnswer }) {
+            throw IllegalArgumentException("At least one Answer must be correct.")
+        }
 
         val question = Question(
-                questionText,
+                questionDTO.questionText,
                 answers,
-                pointsForCorrectAnswer,
-                topic,
+                questionDTO.pointsForCorrectAnswer,
+                questionDTO.topic,
                 try {
-                    Difficulty.valueOf(difficulty)
+                    Difficulty.valueOf(questionDTO.difficulty)
                 } catch (e: IllegalArgumentException) {
+                    logger.warn("Invalid difficulty received. Defaulting to BEGINNER")
                     Difficulty.BEGINNER
-                })
+                }
+        )
 
         dataService.saveQuestion(question)
 
