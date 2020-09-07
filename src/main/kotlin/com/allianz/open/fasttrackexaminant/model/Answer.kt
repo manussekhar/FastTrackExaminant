@@ -1,3 +1,13 @@
 package com.allianz.open.fasttrackexaminant.model
 
-data class Answer(val text: String, val correctAnswer:Boolean)
+import javax.persistence.*
+
+@Entity
+@Table(name = "ANSWER")
+data class Answer(
+        @Id
+        @GeneratedValue
+        val id: Int,
+        val text: String,
+        val correctAnswer: Boolean,
+        )
