@@ -28,30 +28,40 @@ class QuestionService {
      */
     fun createQuestion(questionRequest: QuestionRequest): QuestionResponse {
 
+        val question = map(questionRequest)
+
+        return dataService.persistQuestion(question)
+
+    }
+
+    fun updateQuestion(questionRequest: QuestionRequest, id: Int): QuestionResponse {
+        val question = map(questionRequest, id)
+        return dataService.persistQuestion(question)
+    }
+
+    fun retrieveQuestion(id: Int): Question {
+        return dataService.retrieveQuestion(id)
+    }
+
+
+    private fun map(questionRequest: QuestionRequest, id: Int = 0): Question {
         val answers = questionRequest.answerTexts.mapIndexed { idx, value -> Answer(0, value, questionRequest.correctAnswer.contains(idx)) }
 
         if (answers.all { !it.correctAnswer }) {
             throw ResponseStatusException(HttpStatus.BAD_REQUEST, "At least one Answer must be correct.")
         }
 
-        val question = Question(0,
+        val question = Question(id,
                 questionRequest.questionText,
                 questionRequest.pointsForCorrectAnswer,
                 questionRequest.topic,
                 try {
-                    Difficulty.valueOf(questionRequest.difficulty)
+                    Difficulty.valueOf(questionRequest.difficulty).name
                 } catch (e: IllegalArgumentException) {
                     logger.warn("Invalid difficulty received. Defaulting to BEGINNER")
-                    Difficulty.BEGINNER
+                    Difficulty.BEGINNER.name
                 }, answers
         )
-
-        return dataService.saveQuestion(question)
-
-
-    }
-
-    fun retrieveQuestion(id: Int): Question {
-        return dataService.retrieveQuestion(id)
+        return question
     }
 }

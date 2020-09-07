@@ -13,7 +13,7 @@ data class Question(
         val questionText: String,
         val pointsForCorrectAnswer: Int,
         val topic: String,
-        val difficulty: Difficulty,
+        val difficulty: String,
         @OneToMany(cascade = [CascadeType.ALL],orphanRemoval = true)
         @JoinColumn(name="answer_id")
         val answers: List<Answer>? = null

@@ -1,8 +1,8 @@
 package com.allianz.open.fasttrackexaminant.dto
 
-data class QuestionRequest(val questionText: String,
-                           val answerTexts: List<String>,
-                           val correctAnswer: List<Int>,
-                           val pointsForCorrectAnswer: Int,
-                           val topic: String,
-                           val difficulty: String)
+data class QuestionRequest(var questionText: String,
+                           var answerTexts: List<String>,
+                           var correctAnswer: List<Int>,
+                           var pointsForCorrectAnswer: Int,
+                           var topic: String,
+                           var difficulty: String)
