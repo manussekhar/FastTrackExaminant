@@ -4,7 +4,7 @@ import com.allianz.open.fasttrackexaminant.dto.CandidateResponse
 import com.allianz.open.fasttrackexaminant.dto.DriveRequest
 import com.allianz.open.fasttrackexaminant.dto.DriveResponse
 import com.allianz.open.fasttrackexaminant.model.Candidate
-import com.allianz.open.fasttrackexaminant.model.Exam
+import com.allianz.open.fasttrackexaminant.model.Drive
 import com.allianz.open.fasttrackexaminant.util.Constant
 import com.allianz.open.fasttrackexaminant.util.validateQuestionAvailability
 import com.allianz.open.fasttrackexaminant.util.validateDate
@@ -57,7 +57,7 @@ class DriveService {
         val topics = driveRequest.topic.joinToString()
 
 
-        val exam = Exam(
+        val exam = Drive(
                 0,
                 driveRequest.name,
                 driveRequest.numberOfQuestions,

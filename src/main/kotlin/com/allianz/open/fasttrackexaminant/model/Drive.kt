@@ -4,8 +4,8 @@ import java.util.*
 import javax.persistence.*
 
 @Entity
-@Table(name = "EXAM")
-data class Exam(
+@Table(name = "DRIVE")
+data class Drive(
         @Id
         @GeneratedValue
         @Column(name = "ID")

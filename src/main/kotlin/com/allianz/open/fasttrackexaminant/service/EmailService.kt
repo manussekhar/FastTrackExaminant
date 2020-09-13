@@ -1,20 +1,15 @@
 package com.allianz.open.fasttrackexaminant.service
 
 import com.allianz.open.fasttrackexaminant.model.Candidate
-import com.allianz.open.fasttrackexaminant.model.Exam
+import com.allianz.open.fasttrackexaminant.model.Drive
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.context.annotation.Bean
 import org.springframework.core.env.Environment
 import org.springframework.mail.javamail.JavaMailSender
-import org.springframework.mail.javamail.JavaMailSenderImpl
 import org.springframework.mail.javamail.MimeMessageHelper
 import org.springframework.mail.javamail.MimeMessagePreparator
 import org.springframework.stereotype.Service
 import org.thymeleaf.context.Context
 import org.thymeleaf.spring5.SpringTemplateEngine
-import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver
-import org.thymeleaf.templatemode.TemplateMode
-import java.nio.charset.StandardCharsets
 import java.util.*
 import javax.mail.internet.MimeMessage
 import kotlin.collections.HashMap
@@ -35,8 +30,8 @@ class EmailService {
     private lateinit var env: Environment
 
 
-    fun notifyCandidates(exam: Exam) {
-        exam.candidates.forEach { notifyCandidate(it) }
+    fun notifyCandidates(drive: Drive) {
+        drive.candidates.forEach { notifyCandidate(it) }
     }
 
     fun notifyCandidate(candidate: Candidate) {

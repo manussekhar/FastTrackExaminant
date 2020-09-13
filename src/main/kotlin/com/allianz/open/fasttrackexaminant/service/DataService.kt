@@ -1,8 +1,8 @@
 package com.allianz.open.fasttrackexaminant.service
 
-import com.allianz.open.fasttrackexaminant.dao.ExamRepository
+import com.allianz.open.fasttrackexaminant.dao.DriveRepository
 import com.allianz.open.fasttrackexaminant.dao.QuestionRepository
-import com.allianz.open.fasttrackexaminant.model.Exam
+import com.allianz.open.fasttrackexaminant.model.Drive
 import com.allianz.open.fasttrackexaminant.model.Question
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -18,7 +18,7 @@ class DataService {
 
 
     @Autowired
-    private lateinit var examRepository: ExamRepository
+    private lateinit var driveRepository: DriveRepository
 
     fun persistQuestion(question: Question): Question {
         return questionRepository.save(question)
@@ -33,7 +33,7 @@ class DataService {
     }
 
 
-    fun persistExam(exam: Exam): Exam = examRepository.save(exam)
+    fun persistExam(drive: Drive): Drive = driveRepository.save(drive)
 
 
     fun getAllQuestions(): Iterable<Question> = questionRepository.findAll()
