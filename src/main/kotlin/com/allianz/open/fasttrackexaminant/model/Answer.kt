@@ -7,7 +7,10 @@ import javax.persistence.*
 data class Answer(
         @Id
         @GeneratedValue
+        @Column(name = "ID")
         val id: Int,
+        @Column(name = "TEXT")
         val text: String,
+        @Column(name = "IS_CORRECT")
         val correctAnswer: Boolean,
         )

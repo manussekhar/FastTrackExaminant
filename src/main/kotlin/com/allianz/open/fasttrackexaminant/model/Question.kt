@@ -1,20 +1,32 @@
 package com.allianz.open.fasttrackexaminant.model
 
-import com.allianz.open.fasttrackexaminant.service.Difficulty
 import javax.persistence.*
 
-@Entity
+@Entity(name = "QUESTION")
 @Table(name = "QUESTION")
 data class Question(
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
-        @Column(name = "question_id")
+        @Column(name = "ID")
         val id: Int,
+
+        @Column(name = "TEXT")
         val questionText: String,
+
+        @Column(name = "POINTS_FOR_CORRECT_ANSWER")
         val pointsForCorrectAnswer: Int,
-        val topic: String,
+
+        @OneToOne(cascade = [CascadeType.ALL],orphanRemoval = true)
+        @JoinColumn(name="TOPIC_ID")
+        val topic: Topic,
+
+        @Column(name = "DIFFICULTY")
         val difficulty: String,
+
+        @Column(name = "AVG_ANSWERING_TIME")
+        val averageTimeToAnswer : Long,
+
         @OneToMany(cascade = [CascadeType.ALL],orphanRemoval = true)
-        @JoinColumn(name="answer_id")
+        @JoinColumn(name="ANSWER_ID")
         val answers: List<Answer>? = null
 )

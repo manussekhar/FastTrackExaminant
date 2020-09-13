@@ -4,6 +4,8 @@ import com.allianz.open.fasttrackexaminant.dto.QuestionRequest
 import com.allianz.open.fasttrackexaminant.dto.QuestionResponse
 import com.allianz.open.fasttrackexaminant.model.Answer
 import com.allianz.open.fasttrackexaminant.model.Question
+import com.allianz.open.fasttrackexaminant.model.Topic
+import com.allianz.open.fasttrackexaminant.util.validateDifficulty
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -30,19 +32,16 @@ class QuestionService {
 
         val question = map(questionRequest)
 
-        return dataService.persistQuestion(question)
+        return QuestionResponse(dataService.persistQuestion(question).id)
 
     }
 
     fun updateQuestion(questionRequest: QuestionRequest, id: Int): QuestionResponse {
         val question = map(questionRequest, id)
-        return dataService.persistQuestion(question)
+        return QuestionResponse(dataService.persistQuestion(question).id)
     }
 
-    fun retrieveQuestion(id: Int): Question {
-        return dataService.retrieveQuestion(id)
-    }
-
+    fun retrieveQuestion(id: Int): Question = dataService.retrieveQuestion(id)
 
     private fun map(questionRequest: QuestionRequest, id: Int = 0): Question {
         val answers = questionRequest.answerTexts.mapIndexed { idx, value -> Answer(0, value, questionRequest.correctAnswer.contains(idx)) }
@@ -51,17 +50,22 @@ class QuestionService {
             throw ResponseStatusException(HttpStatus.BAD_REQUEST, "At least one Answer must be correct.")
         }
 
-        val question = Question(id,
+        return Question(id,
                 questionRequest.questionText,
                 questionRequest.pointsForCorrectAnswer,
-                questionRequest.topic,
-                try {
-                    Difficulty.valueOf(questionRequest.difficulty).name
-                } catch (e: IllegalArgumentException) {
-                    logger.warn("Invalid difficulty received. Defaulting to BEGINNER")
-                    Difficulty.BEGINNER.name
-                }, answers
+                Topic(0, questionRequest.topic),
+                validateDifficulty { Difficulty.valueOf(questionRequest.difficulty).name },
+                questionRequest.averageTimeToAnswer,
+                answers
         )
-        return question
+    }
+
+    fun getRandomQuestions(numberOfQuestions: Long, averageTimeToAnswer: Long, topic: List<String>, difficulty: String): List<Question> {
+
+        return dataService.getRandomQuestions(numberOfQuestions,averageTimeToAnswer, topic,  difficulty)
+    }
+
+    fun getQuestions(numberOfQuestions: Long, averageTimeToAnswer: Long, topic: List<String>, difficulty: String): List<Question> {
+        return dataService.getQuestions(numberOfQuestions,averageTimeToAnswer, topic,  difficulty)
     }
 }

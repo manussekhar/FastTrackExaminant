@@ -14,17 +14,11 @@ class QuestionController {
     private lateinit var questionService: QuestionService
 
     @PostMapping("/Question")
-    fun createQuestion(@RequestBody question: QuestionRequest): QuestionResponse {
-        return questionService.createQuestion(question)
-    }
+    fun createQuestion(@RequestBody question: QuestionRequest): QuestionResponse = questionService.createQuestion(question)
 
     @GetMapping("/Question/{id}")
-    fun getQuestion(@PathVariable id: Int): Question {
-        return questionService.retrieveQuestion(id)
-    }
+    fun getQuestion(@PathVariable id: Int): Question = questionService.retrieveQuestion(id)
 
     @PutMapping("/Question/{id}")
-    fun updateQuestion(@RequestBody question: QuestionRequest, @PathVariable id: Int): QuestionResponse {
-        return questionService.updateQuestion(question, id)
-    }
+    fun updateQuestion(@RequestBody question: QuestionRequest, @PathVariable id: Int): QuestionResponse = questionService.updateQuestion(question, id)
 }

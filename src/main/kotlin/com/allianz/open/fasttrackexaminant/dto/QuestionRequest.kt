@@ -5,4 +5,5 @@ data class QuestionRequest(var questionText: String,
                            var correctAnswer: List<Int>,
                            var pointsForCorrectAnswer: Int,
                            var topic: String,
-                           var difficulty: String)
+                           var difficulty: String,
+                           var averageTimeToAnswer: Long)
