@@ -7,3 +7,12 @@ can proceed with the best talents from the exam based on candidate's performance
 Technology stack
 ================
 Spring Boot + Kotlin + Websockets + Angular Material + MySQL
+
+Use Case Diagram
+================
+![Alt text](./Design/Services/images/UseCase.png?raw=true "UseCase")
+
+
+Sequence Diagram
+================
+![Alt text](./Design/Services/images/Sequence.png?raw=true "Sequence")
