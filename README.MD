@@ -1,22 +1,9 @@
-Users
-------
-1. Admin(HR)
-2. Candidate
-3. Admin(Technical)
+Fast Track Examinant is a tool to streamline the process of recruitment by providing as much automation as possible for hiring the best talents.
+The primary users of this tool are guys from human resource and the candidates applying for a position. This tools helps HR guys to schedule an
+exam on any desired topic and assign to any number of candidates. Every candidate will be notified about the exam and he/she can attend the exam from their 
+own device without the need for scheduling an appointment for a face to face or phone interview. The evaluation of the results is automatic and the HR guys 
+can proceed with the best talents from the exam based on candidate's performance.
 
-Use cases
---------------
-1. As an Admin(HR) I want to schedule an Exam with a Test on a desired topic on a time so that I can assign test to candidates.[a topic can be as granular as Java, j2ee, angular, css]
-2. As an Admin(HR) I want to assign an Exam for a number of candidates so that the candidates can attend the exam
-3. As an Admin(HR) I want to get the result of an Exam so that I can select the best talent.
-4. As an Admin(HR) I will get the historic data of Each Exam so that I can proceed with further rounds of evaluation
-
-5. As a Candidate I want receive a link to attend the exam
-
-6. As an Admin(Technical) I want to Create a Question so that I can tag the question with a topic so that the Admin(HR) can choose the topic to create an exam.
-8. As an Admin(Technical) I want to bulk upload Tests/Questions.
-9. As an Admin(Technical) I want to update Tests/Questions for correction.
-
-
-
-
+Technology stack
+================
+Spring Boot + Kotlin + Websockets + Angular Material + MySQL
