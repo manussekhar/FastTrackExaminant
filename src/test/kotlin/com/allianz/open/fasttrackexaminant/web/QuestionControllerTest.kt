@@ -108,14 +108,13 @@ internal class QuestionControllerTest() {
                         "'pointsForCorrectAnswer':1," +
                         "'topic':{'name':'Mathematics'}," +
                         "'difficulty':'BEGINNER'," +
-                        "'answeringTime':2," +
+                        "'averageTimeToAnswer':2," +
                         "'answers':[" +
                         "{'text':'One','correctAnswer':false}," +
                         "{'text':'Two','correctAnswer':true}," +
                         "{'text':'Three','correctAnswer':false}," +
                         "{'text':'Four','correctAnswer':false}" +
-                        "]" +
-                        "}")
+                        "]}")
             }
         }.andDo { print() }.andReturn()
 
@@ -170,14 +169,13 @@ internal class QuestionControllerTest() {
                                 "'pointsForCorrectAnswer':1," +
                                 "'topic':{'name':'Mathematics'}," +
                                 "'difficulty':'BEGINNER'," +
-                                "'answeringTime':2," +
+                                "'averageTimeToAnswer':2," +
                                 "'answers':[" +
                                 "{'text':'One','correctAnswer':false}," +
                                 "{'text':'Two','correctAnswer':true}," +
                                 "{'text':'Three','correctAnswer':false}," +
                                 "{'text':'Four','correctAnswer':false}" +
-                                "]" +
-                                "}")
+                                "]}")
                     }
                 }.andDo { print() }.andReturn()
 

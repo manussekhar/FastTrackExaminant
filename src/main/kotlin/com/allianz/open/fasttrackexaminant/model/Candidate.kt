@@ -11,4 +11,8 @@ data class Candidate(@Id
                      @Column(name = "EMAIL")
                      val email: String,
                      @Column(name = "QUESTIONS")
-                     val questions: String)
+                     val questions: String,
+                     @Column(name = "STATUS")
+                     var status: String = "SCHEDULED-INVITATION_NOT_SEND",
+                     @Column(name = "SCORE")
+                     val score: Int = 0)

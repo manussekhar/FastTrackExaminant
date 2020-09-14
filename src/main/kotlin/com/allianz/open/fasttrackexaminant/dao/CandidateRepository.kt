@@ -1,9 +1,9 @@
 package com.allianz.open.fasttrackexaminant.dao
 
-import com.allianz.open.fasttrackexaminant.model.Answer
+import com.allianz.open.fasttrackexaminant.model.Candidate
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface AnswerRepository : CrudRepository<Answer, Int> {
+interface CandidateRepository : CrudRepository<Candidate, Int> {
 }

@@ -32,3 +32,13 @@ fun validateQuestionAvailability(body: () -> List<Question>): List<Question> {
     if (questions.isEmpty()) throw ResponseStatusException(HttpStatus.NOT_FOUND, "Questions not for the supplied criteria")
     return questions
 }
+
+fun <T>validateDataAvailability(body: () -> T, message: String): T {
+
+     try {
+        return body()
+    } catch (e: NoSuchElementException) {
+        throw ResponseStatusException(HttpStatus.NOT_FOUND, message)
+    }
+
+}

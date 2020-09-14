@@ -29,8 +29,8 @@ data class Drive(
         @Column(name = "RANDOMIZE_QUESTIONS")
         val randomizeQuestions: Boolean,
 
-        @OneToMany(cascade = [CascadeType.ALL],orphanRemoval = true)
-        @JoinColumn(name="CANDIDATE_ID")
+        @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true)
+        @JoinColumn(name = "CANDIDATE_ID")
         val candidates: List<Candidate>,
 
         @Column(name = "TOPIC")
