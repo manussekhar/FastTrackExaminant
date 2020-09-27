@@ -35,7 +35,7 @@ internal class QuestionControllerTest() {
     @Test
     fun `1 - Create Question Positive`() {
         val result = mockMvc.post("/Question") {
-            content = mapper.writeValueAsString(QuestionRequest("What is 1+1 ?", "One,Two,Three,Four".split(",").toList(), listOf(1), 1, "Mathematics", Difficulty.BEGINNER.name,2))
+            content = mapper.writeValueAsString(QuestionRequest("What is 1+1 ?", "One,Two,Three,Four".split(",").toList(), listOf(1), 1, "Mathematics", Difficulty.BEGINNER.name, 2))
             contentType = MediaType.APPLICATION_JSON
         }.andExpect {
             status { isOk }
@@ -48,7 +48,7 @@ internal class QuestionControllerTest() {
     @Test
     fun `2 - Create Question Positive - 2 answers`() {
         val result = mockMvc.post("/Question") {
-            content = mapper.writeValueAsString(QuestionRequest("What comes between 1 and 4 ?", "One,Two,Three,Four".split(",").toList(), listOf(1, 2), 1, "Mathematics", Difficulty.BEGINNER.name,2))
+            content = mapper.writeValueAsString(QuestionRequest("What comes between 1 and 4 ?", "One,Two,Three,Four".split(",").toList(), listOf(1, 2), 1, "Mathematics", Difficulty.BEGINNER.name, 2))
             contentType = MediaType.APPLICATION_JSON
         }.andExpect {
             status { isOk }
@@ -61,7 +61,7 @@ internal class QuestionControllerTest() {
     @Test
     fun `3 - Create Question Negative - Invalid difficulty value`() {
         val result = mockMvc.post("/Question") {
-            content = mapper.writeValueAsString(QuestionRequest("What is 1+1 ?", "One,Two,Three,Four".split(",").toList(), listOf(1), 1, "Mathematics", "Invalid difficulty",2))
+            content = mapper.writeValueAsString(QuestionRequest("What is 1+1 ?", "One,Two,Three,Four".split(",").toList(), listOf(1), 1, "Mathematics", "Invalid difficulty", 2))
             contentType = MediaType.APPLICATION_JSON
         }.andExpect {
             status { isOk }
@@ -74,7 +74,7 @@ internal class QuestionControllerTest() {
     @Test
     fun `4 - Create Question Negative - Invalid correct answer`() {
         mockMvc.post("/Question") {
-            content = mapper.writeValueAsString(QuestionRequest("What is 1+1 ?", "One,Two,Three,Four".split(",").toList(), listOf(5), 1, "Mathematics", "Invalid difficulty",2))
+            content = mapper.writeValueAsString(QuestionRequest("What is 1+1 ?", "One,Two,Three,Four".split(",").toList(), listOf(5), 1, "Mathematics", "Invalid difficulty", 2))
             contentType = MediaType.APPLICATION_JSON
         }.andExpect {
             status { isBadRequest }
@@ -88,7 +88,7 @@ internal class QuestionControllerTest() {
         println("--" + this::`5 - Retrieve Question Positive`.name + "--")
         println("---- Create Question ----")
         val result = mockMvc.post("/Question") {
-            content = mapper.writeValueAsString(QuestionRequest("What is 1+1 ?", "One,Two,Three,Four".split(",").toList(), listOf(1), 1, "Mathematics", Difficulty.BEGINNER.name,2))
+            content = mapper.writeValueAsString(QuestionRequest("What is 1+1 ?", "One,Two,Three,Four".split(",").toList(), listOf(1), 1, "Mathematics", Difficulty.BEGINNER.name, 2))
             contentType = MediaType.APPLICATION_JSON
         }.andExpect {
             status { isOk }
@@ -133,7 +133,7 @@ internal class QuestionControllerTest() {
     fun `7 - Update Question Positive - Update Question Text`() {
 
         println("---- Create Question ----")
-        val questionRequest = QuestionRequest("What is 1+1 ?", "One,Two,Three,Four".split(",").toList(), listOf(1), 1, "Mathematics", Difficulty.BEGINNER.name,2)
+        val questionRequest = QuestionRequest("What is 1+1 ?", "One,Two,Three,Four".split(",").toList(), listOf(1), 1, "Mathematics", Difficulty.BEGINNER.name, 2)
         val result = mockMvc.post("/Question") {
             content = mapper.writeValueAsString(questionRequest)
             contentType = MediaType.APPLICATION_JSON
@@ -164,18 +164,19 @@ internal class QuestionControllerTest() {
                     status { isOk }
                     content {
                         contentType(MediaType.APPLICATION_JSON)
-                        json("{" +
-                                "'questionText':'One Plus One Equals ?'," +
-                                "'pointsForCorrectAnswer':1," +
-                                "'topic':{'name':'Mathematics'}," +
-                                "'difficulty':'BEGINNER'," +
-                                "'averageTimeToAnswer':2," +
-                                "'answers':[" +
-                                "{'text':'One','correctAnswer':false}," +
-                                "{'text':'Two','correctAnswer':true}," +
-                                "{'text':'Three','correctAnswer':false}," +
-                                "{'text':'Four','correctAnswer':false}" +
-                                "]}")
+                        json("""{
+                            |"questionText":"One Plus One Equals ?",
+                            |"pointsForCorrectAnswer":1,
+                            |"topic":{"name":"Mathematics"},
+                            |"difficulty":"BEGINNER",
+                            |"averageTimeToAnswer":2,
+                            |"answers":[
+                                        |{"text":"One","correctAnswer":false},
+                                        |{"text":"Two","correctAnswer":true},
+                                        |{"text":"Three","correctAnswer":false},
+                                        |{"text":"Four","correctAnswer":false}
+                                        |]
+|                                   }""".trimMargin())
                     }
                 }.andDo { print() }.andReturn()
 

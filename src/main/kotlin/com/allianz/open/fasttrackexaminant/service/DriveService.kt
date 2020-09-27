@@ -39,12 +39,9 @@ class DriveService {
 
         val candidates = driveRequest.candidates.map { email ->
             val selectedQuestions = validateQuestionAvailability {
-                if (driveRequest.randomizeQuestions) {
-                    questionService.getRandomQuestions(driveRequest.numberOfQuestions,
-                            averageTimeToAnswer, driveRequest.topic, driveRequest.difficulty)
-                } else {
-                    questionService.getQuestions(driveRequest.numberOfQuestions,
-                            averageTimeToAnswer, driveRequest.topic, driveRequest.difficulty)
+                when (driveRequest.randomizeQuestions) {
+                    true -> questionService.getRandomQuestions(driveRequest, averageTimeToAnswer)
+                    false -> questionService.getQuestions(driveRequest, averageTimeToAnswer)
                 }
             }
 

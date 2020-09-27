@@ -1,5 +1,6 @@
 package com.allianz.open.fasttrackexaminant.service
 
+import com.allianz.open.fasttrackexaminant.dto.DriveRequest
 import com.allianz.open.fasttrackexaminant.dto.QuestionRequest
 import com.allianz.open.fasttrackexaminant.dto.QuestionResponse
 import com.allianz.open.fasttrackexaminant.model.Answer
@@ -60,12 +61,11 @@ class QuestionService {
         )
     }
 
-    fun getRandomQuestions(numberOfQuestions: Long, averageTimeToAnswer: Long, topic: List<String>, difficulty: String): List<Question> {
+    fun getRandomQuestions(driveRequest: DriveRequest, averageTimeToAnswer:Long): List<Question> {
 
-        return dataService.getRandomQuestions(numberOfQuestions,averageTimeToAnswer, topic,  difficulty)
+        return dataService.getRandomQuestions(driveRequest.numberOfQuestions, averageTimeToAnswer, driveRequest.topic, driveRequest.difficulty)
     }
-
-    fun getQuestions(numberOfQuestions: Long, averageTimeToAnswer: Long, topic: List<String>, difficulty: String): List<Question> {
-        return dataService.getQuestions(numberOfQuestions,averageTimeToAnswer, topic,  difficulty)
+    fun getQuestions(driveRequest: DriveRequest, averageTimeToAnswer:Long): List<Question> {
+        return dataService.getQuestions(driveRequest.numberOfQuestions, averageTimeToAnswer, driveRequest.topic, driveRequest.difficulty)
     }
 }
